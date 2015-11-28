@@ -6,28 +6,43 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 
 </head>
 <body>
 	<div class="container">
-		<h1>{{image.name}}</h1>
-		<img src = "{{image.file.url}}"></img>
+		<div class="header clearfix">
+			<nav>
+				<ul class="nav nav-pills pull-right">
+					<li role="presentation" class="active"><a href="#">Home</a></li>
+					<li role="presentation"><a href="#">About</a></li>
+					<li role="presentation"><a href="#">Contributers</a></li>
+				</ul>
+			</nav>
+			<h3 class="text-muted">Makeup Master</h3>
+		</div>
+		<div class="jumbotron">
+			<img src = "{{image.file.url}}"></img>
+			<p>{{image.name}}</p>
+		</div>
+
+
+
+		<div class="jumbotron">
+			<h4>Please Choose a MakeUp effect below:</h4>
+			<form action = "{% url 'choice' image.id %}" method = "post">
+				{% csrf_token %}
+				<input type = "radio" name = "choice" value = "Addon" />Addon<br/>
+				<input type = "radio" name = "choice" value = "Removal" />Removal<br/>
+				<input type = "radio" name = "choice" value = "Suggestion" />Suggestion<br />
+
+				<input  class="btn btn-success" type = "submit" value = "Submit" />
+			</form>
+		</div>
+
 	</div>
 
 
-	<div class="container">
-		<p style="font-size: 30px; color: purple; font-family: Arial">Please Choose a MakeUp effect below:</p>
-		<br /><br />
-		<form action = "{% url 'choice' image.id %}" method = "post">
-			{% csrf_token %}
-			<input type = "radio" name = "choice" value = "Addon" />Addon<br/>
-			<input type = "radio" name = "choice" value = "Removal" />Removal<br/>
-			<input type = "radio" name = "choice" value = "Suggestion" />Suggestion<br />
-
-			<input type = "submit" value = "Submit!" />
-		</form>
-	</div>
-	
 </body>
 
 </html>

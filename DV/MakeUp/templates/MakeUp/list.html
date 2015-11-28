@@ -7,44 +7,60 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 </head>
 <body>
-	<div class="jumbotron">
-		<p>Hello, Welcome to MakeUp Master Web App</p>
-	</div>
-	{% if image_list %}
 	<div class="container">
-		<ul>
-			{% for image in image_list %}
-			<li><a href = "{% url 'detail' image.id %}">{{image.name}}</a>
-			</li>
-			{% endfor %}
-		</ul>
-		{% else %}
-		<p>No raw images available</p>
-		{% endif %}
+		<div class="header clearfix">
+			<nav>
+				<ul class="nav nav-pills pull-right">
+					<li role="presentation" class="active"><a href="#">Home</a></li>
+					<li role="presentation"><a href="#">About</a></li>
+					<li role="presentation"><a href="#">Contributers</a></li>
+				</ul>
+			</nav>
+			<h3 class="text-muted">Makeup Master</h3>
+		</div>
+
+
+		<div class="jumbotron">
+			<p>Welcome to MakeUp Master Web App!</p>
+		</div>
+
+
+		<div class="jumbotron">
+			
+			<h3>Please Upload New Raw Image Below:</h3>
+			<form role="form" action="{% url 'list' %}" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<p>{{ form.non_field_errors }}</p>
+				<p>{{form.name.label_tag}}</p>
+				<p>{{form.name}}</p>           
+
+				<p>{{ form.image.label_tag }}</p>
+				<p>
+					{{ form.image.errors }}
+					{{ form.image }}
+				</p>
+				<p><input type="submit" class="btn btn-success" value="Upload" /></p>
+			</form>
+		</div>
+
+		<div class="jumbotron">
+			{% if image_list %}
+			<ul>
+				{% for image in image_list %}
+				<li><a href = "{% url 'detail' image.id %}">{{image.name}}</a>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<p>No raw images available</p>
+			{% endif %}
+		</div>
+		
+
 	</div>
-
-	<div class="page-header">
-		<h1>Please Upload New Raw Image Below:</h1>
-	</div>
-
-
-	<form role="form" action="{% url 'list' %}" method="post" enctype="multipart/form-data">
-		{% csrf_token %}
-		<p>{{ form.non_field_errors }}</p>
-		<p>{{form.name.label_tag}}</p>
-		<p>{{form.name}}</p>           
-
-		<p>{{ form.image.label_tag }}</p>
-		<p>
-			{{ form.image.errors }}
-			{{ form.image }}
-		</p>
-		<p><input type="submit" class="btn btn-default" value="Upload" /></p>
-	</form>
-
-
 
 </body>
 </html>
