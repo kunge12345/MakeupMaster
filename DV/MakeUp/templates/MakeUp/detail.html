@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html>
-	<head>Data Visualization</head>
-	<body>
-			<h1>{{image.name}}</h1>
-			<img src = "{{image.file.url}}"></img>
-			
-			<p style="font-size: 30px; color: purple; font-family: Arial">Please Choose a MakeUp effect below:</p>
-			<br /><br />
-			<form action = "{% url 'choice' image.id %}" method = "post">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1>{{image.name}}</h1>
+		<img src = "{{image.file.url}}"></img>
+	</div>
+
+
+	<div class="container">
+		<p style="font-size: 30px; color: purple; font-family: Arial">Please Choose a MakeUp effect below:</p>
+		<br /><br />
+		<form action = "{% url 'choice' image.id %}" method = "post">
 			{% csrf_token %}
-				<input type = "radio" name = "choice" value = "Addon" />Addon<br/>
-				<input type = "radio" name = "choice" value = "Removal" />Removal<br/>
-				<input type = "radio" name = "choice" value = "Suggestion" />Suggestion<br />
-				
-				<input type = "submit" value = "Submit!" />
-			</form>
+			<input type = "radio" name = "choice" value = "Addon" />Addon<br/>
+			<input type = "radio" name = "choice" value = "Removal" />Removal<br/>
+			<input type = "radio" name = "choice" value = "Suggestion" />Suggestion<br />
+
+			<input type = "submit" value = "Submit!" />
+		</form>
+	</div>
 	
-	</body>
+</body>
 
 </html>
