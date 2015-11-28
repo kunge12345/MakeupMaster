@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<title>Final Project</title>
+	<head></head>
+	<body>
+		<p style="font-size:40px; color: red">Data Visualization Final Project</p> 
+		<form action = "url" method = "post" name = "Form1">
+			<p>Please Choose one Make Up option: </p>
+			<input type = "radio" name = "Choice" value = "Addon" >Add-on<br>
+			<input type = "radio" name = "Choice" value = "Removal" >Removal<br>
+			<input type = "radio" name = "Choice" value = "Beauty Suggestion" >Beauty Suggestion<br>
+			<br /><br />
+			Please upload unprocessed img: <input type = "file" name = "JSON_file" />
+			<br /><br />
+			Please upload facial landmarks: <input type = "file" name = "landmarks" />
+			<br /><br />
+			<input type = "submit" value = "Submit!" onClick = "checkForm ()" />
+		</form>
+	</body>
+
+</html>

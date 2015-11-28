@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<p style='font-size: 40px; color:red'>Hello, Welcome to MakeUp Master Web App</p>
+		{% if image_list %}
+			<ul>
+			{% for image in image_list %}
+				<li><a href = "{% url 'detail' image.id %}">{{image.name}}</a>
+				</li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No raw images available</p>
+		{% endif %}
+		
+		<a href = "/upload/">New Upload!</a>
+		
+		
+	</body>
+</html>

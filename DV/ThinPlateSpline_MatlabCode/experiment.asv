@@ -1,0 +1,103 @@
+% Load in some data
+scale = 1;
+ipts = load('Data/Picture3.pts');
+%ipts = ipts.ipts;
+opts = load('Data/Picture2.pts');
+%opts = opts.opts;
+img = imread('Data/Picture3.jpg');
+ipts = ipts*scale;
+opts = opts*(scale*1);
+img = imresize(img, scale);
+
+
+% Perform the TPS warp
+[wimg, w, a] = TPS_im_warp(img, opts, ipts);
+
+% Make a mesh of the inverse warp. The calculation of image pixels is done
+% using the forward warp.
+% Number of grid elements along x and along y
+N = 50;
+[grid_x, grid_y] = meshgrid(1:size(img,1)/N:size(img,1), 1:size(img,2)/N:size(img,2));
+[w, a, K] = pts2TPS_param(ipts, opts);
+tps = psi_tps([grid_x(:), grid_y(:)], a, w, opts);
+wgrid_x = reshape(tps(:,1), size(grid_x,1), size(grid_x,2));
+wgrid_y = reshape(tps(:,2), size(grid_y,1), size(grid_y,2));
+
+%Display the Data
+close all;
+figure(1);
+iptsetpref('ImshowBorder', 'tight')
+M = 3;
+N = 2;
+I = 1;
+%%
+%
+%%
+subplot(M, N, I, 'align'); I = I+1;
+% subaxis(M,N,I,'SpacingHoriz',0, 'MR',0); I = I+1;
+
+im1 = imread('Data\Picture3.jpg');
+imagesc(im1); hold on;
+plot(ipts(:,1), ipts(:,2), 'rd');
+axis image ij;
+title('Base Image and Base Points');
+%%
+%
+%%
+subplot(M, N, I, 'align'); I = I+1;
+% subaxis(M,N,I,'SpacingHoriz',0,'MR',0); I = I+1;
+
+im1 = imread('Data\Picture2.jpg');
+imagesc(im1); hold on;
+plot(opts(:,1), opts(:,2), 'rd');
+axis image ij;
+title('Target Image and Target Points');
+
+%%
+%
+%%
+subplot(M, N, I, 'align'); I = I+1;
+% subaxis(M,N,I,'SpacingHoriz',0,'MR',0); I = I+1;
+g = sqrt((grid_x - wgrid_x).^2 + (grid_y - wgrid_y).^2);
+surf(wgrid_x, wgrid_y, g);
+view(2);
+axis image ij;
+title('Warped Thin Plate');
+
+%%
+%
+%%
+subplot(M, N, I, 'align'); I = I+1;
+% subaxis(M,N,I,'SpacingHoriz',0,'MR',0); I = I+1;
+
+g = sqrt((grid_x - grid_x).^2 + (grid_y - grid_y).^2);
+surf(grid_x, grid_y, g);
+view(2);
+axis image ij;
+title('Original Thin Plate');
+
+%%
+%
+%%
+%subplot(M, N, I, 'align'); I = I+1;
+subaxis(M,N,I,'SpacingHoriz',0,'MR',0); I = I+1;
+
+hold on;
+imagesc(img); colormap gray;
+plot(ipts(:,1), ipts(:,2), 'rd');
+axis image ij;
+title('Base Image and Base Points');
+
+%%
+%
+%%
+%subplot(M, N, I, 'align'); I = I+1;
+subaxis(M,N,I,'SpacingHoriz',0,'MR',0); I = I+1;
+
+hold on;
+imagesc(wimg);
+plot(opts(:,1), opts(:,2), 'rd');
+axis image ij;
+title('Base Image and Target Points');
+
+ colormap jet;

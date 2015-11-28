@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Welcome to MakeUp Master Web App</h2>
+    <ul>
+        {% for image in images %}
+            <li>{{ image.name }}</li>
+        {% endfor %}
+        
+        
+    </ul>
+    
+    
+    <a href = "/upload/">Click Here!</a>
+{% endblock %}
