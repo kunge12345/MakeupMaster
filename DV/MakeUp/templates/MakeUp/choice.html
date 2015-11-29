@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<head></head>
-	<body>
-		<p>The selection you made is: </p>
-		<br/>
-		<p>{{ x }}</p>
-		<img src = "{{image.file.url}}"></img>
+<head>
 
-	</body>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+	<title>Makeup Master - Result</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header clearfix">
+			<nav>
+				<ul class="nav nav-pills pull-right">
+					<li role="presentation" class="active"><a href="{% url 'list' %}">Home</a></li>
+					<li role="presentation"><a href="#">About</a></li>
+					<li role="presentation"><a href="#">Contributers</a></li>
+				</ul>
+			</nav>
+			<h3 class="text-muted">Makeup Master</h3>
+		</div>
+
+		<div class="jumbotron">
+			<p style="text-align:left">The selection you made is: </p>
+			<br/>
+			<p style="text-align:left">{{ x }}</p>
+			<img src = "{{image.file.url}}"></img>
+		</div>
+	</div>
+
+</body>
 </html>
